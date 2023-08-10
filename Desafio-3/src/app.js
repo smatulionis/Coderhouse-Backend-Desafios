@@ -1,6 +1,6 @@
 import ProductManager from './ProductManager.js';
 import express from 'express';
-
+// prueba
 const PORT = 4000;
 const app = express();
 const productManager = new ProductManager();
