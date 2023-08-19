@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 
-export default class CartsManager {
+export default class CartManager {
     constructor() {
         this.path = "./src/models/carts.json";
     }
