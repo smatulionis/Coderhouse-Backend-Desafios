@@ -16,7 +16,7 @@ app.get('/products', async (req, res) => {
         res.send(limitProducts);
     }
     
-})
+});
 
 app.get('/products/:pid', async (req, res) => { 
     const products = await productManager.getProducts();
@@ -27,8 +27,8 @@ app.get('/products/:pid', async (req, res) => {
     } else {
         res.send("Producto no existente");
     }
-})
+});
 
 app.listen(PORT, () => {
     console.log(`Server on port ${PORT}`);
-})
+});
