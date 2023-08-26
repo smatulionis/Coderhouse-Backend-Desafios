@@ -6,14 +6,14 @@ form.addEventListener('submit', (e) => {
     const datForm = new FormData(e.target)
     const prod = Object.fromEntries(datForm)
     console.log(prod)
-    socket.emit('nuevoProducto', prod)
+    socket.emit('newProduct', prod)
     e.target.reset()
 })
 
 socket.on('prods', (newProds) => {
     parrafosProductos.innerHTML = ""
     newProds.forEach(prod => {
-        parrafosProductos.innerHTML += `<p>Title: ${prod.title} Descripción: ${prod.description} Price: ${prod.price} Code: ${prod.code} Stock: ${prod.stock} Category: ${prod.category} Status: ${prod.status} Id: ${prod.id}</p>`
+        parrafosProductos.innerHTML += `<p>Título: ${prod.title} Descripción: ${prod.description} Precio: ${prod.price} Código: ${prod.code} Stock: ${prod.stock} Categoría: ${prod.category} Estado: ${prod.status} Id: ${prod.id}</p>`
     })
 })
 

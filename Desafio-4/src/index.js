@@ -8,12 +8,11 @@ import { Server } from 'socket.io';
 import path from 'path';
 import ProductManager from './ProductManager.js';
 
-
 const PORT = 8080;
 const app = express();
 
 const serverExpress = app.listen(PORT, () => {
-    console.log(`Server on port ${PORT}`)
+    console.log(`Server on port ${PORT}`);
 })
 
 app.use(express.json());
@@ -24,16 +23,15 @@ app.set('views', path.resolve(__dirname, './views'));
 app.use('/realtimeproducts', express.static(path.join(__dirname, '/public')));
 
 const productManager = new ProductManager();
-
-export const io = new Server(serverExpress)
+const io = new Server(serverExpress);
 
 io.on('connection', (socket) => {
     console.log("Servidor Socket.io conectado");
     
-    socket.on('nuevoProducto', async (nuevoProd) => {
-        await productManager.addProduct(nuevoProd)
-        const newProducts = await productManager.getProducts()
-        socket.emit('prods', newProducts)
+    socket.on('newProduct', async (newProd) => {
+        await productManager.addProduct(newProd);
+        const newProducts = await productManager.getProducts();
+        socket.emit('prods', newProducts);
     })
 })
 
