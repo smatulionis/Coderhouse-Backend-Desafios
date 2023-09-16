@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import prodsRouter from './routes/products.routes.js';
@@ -17,7 +18,7 @@ const serverExpress = app.listen(PORT, () => {
     console.log(`Server on port ${PORT}`);
 })
 
-mongoose.connect('mongodb+srv://smatulionis123:nmbAS7qjHodMcI4r@cluster0.kodmlqc.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect(process.env.MONGO_URL)
     .then(() => console.log('BD conectada'))
     .catch(() => console.log('Error en conexion a BD'));
 
