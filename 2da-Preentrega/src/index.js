@@ -16,7 +16,7 @@ const PORT = 8080;
 
 const serverExpress = app.listen(PORT, () => {
     console.log(`Server on port ${PORT}`);
-})
+});
 
 mongoose.connect(process.env.MONGO_URL)
     .then(() => console.log('BD conectada'))
