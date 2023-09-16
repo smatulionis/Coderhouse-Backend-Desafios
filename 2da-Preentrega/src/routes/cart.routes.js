@@ -46,8 +46,8 @@ cartRouter.post('/:cid/products/:pid', async (req, res) => {
                     cart.products.push({ id_prod: pid, quantity: quantity });
                 }
 
-                const updatedCart = await cartModel.findByIdAndUpdate(cid, cart);
-                res.status(200).send({ Response: 'OK', Message: updatedCart });
+                await cartModel.findByIdAndUpdate(cid, cart);
+                res.status(200).send({ Response: 'Producto agregado con éxito' });
             } else {
                 res.status(404).send({ Response: 'Error en agregar producto', Message: 'Producto no encontrado' });
             }
@@ -70,11 +70,11 @@ cartRouter.delete('/:cid/products/:pid', async (req, res) => {
             const prod = await productModel.findById(pid); 
 
             if (prod) {
-                const index = cart.products.findIndex(item => item.id_prod == pid);
+                const index = cart.products.findIndex(item => item.id_prod._id == pid);
                 if (index != -1) {
                     cart.products.splice(index, 1);
-                    const updatedCart = await cartModel.findByIdAndUpdate(cid, cart);
-                    res.status(200).send({ Response: 'OK', Message: updatedCart });
+                    await cartModel.findByIdAndUpdate(cid, cart);
+                    res.status(200).send({ Response: 'Producto eliminado con éxito' });
                 } else {
                     res.status(404).send({ Response: 'Error en eliminar producto', Message: 'Producto no encontrado en el carrito' });
                 } 
@@ -136,8 +136,8 @@ cartRouter.put('/:cid/products/:pid', async (req, res) => {
             const prod = await productModel.findById(pid); 
 
             if (prod) {
-                const index = cart.products.findIndex(item => item.id_prod == pid);
-    
+                const index = cart.products.findIndex(item => item.id_prod._id == pid);
+            
                 if (index != -1) {
                     cart.products[index].quantity = quantity;
                     await cartModel.findByIdAndUpdate(cid, cart);
