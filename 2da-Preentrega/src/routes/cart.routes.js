@@ -98,6 +98,8 @@ cartRouter.put('/:cid', async (req, res) => {
     try {
         const cart = await cartModel.findById(cid);
         if (cart) { 
+            cart.products = [];
+
             for (const prod of newArray) {
                 const newProd = await productModel.findById(prod.id_prod);
                 if (newProd) {
