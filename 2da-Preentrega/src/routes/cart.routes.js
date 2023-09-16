@@ -137,10 +137,11 @@ cartRouter.put('/:cid/products/:pid', async (req, res) => {
 
             if (prod) {
                 const index = cart.products.findIndex(item => item.id_prod == pid);
+    
                 if (index != -1) {
                     cart.products[index].quantity = quantity;
-                    const updatedCart = await cartModel.findByIdAndUpdate(cid, cart);
-                    res.status(200).send({ Response: 'OK', Message: updatedCart });
+                    await cartModel.findByIdAndUpdate(cid, cart);
+                    res.status(200).send({ Response: 'Producto actualizado con éxito' });
                 } else {
                     res.status(404).send({ Response: 'Error en actualizar producto', Message: 'Producto no encontrado en el carrito' });
                 }
@@ -165,8 +166,8 @@ cartRouter.delete('/:cid', async (req, res) => {
         const cart = await cartModel.findById(cid);
         if (cart) {
             cart.products = [];
-            const updatedCart = await cartModel.findByIdAndUpdate(cid, cart);
-            res.status(200).send({ Response: 'OK', Message: updatedCart });
+            await cartModel.findByIdAndUpdate(cid, cart);
+            res.status(200).send({ Response: 'Productos eliminados con éxito' });
         } else {
             res.status(404).send({ Response: 'Error en eliminar carrito', Message: 'Carrito no encontrado' });
         }
