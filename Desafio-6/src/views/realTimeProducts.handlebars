@@ -1,0 +1,27 @@
+<h1>Productos agregados a la fecha</h1>
+    <div id="paragraphProds">
+        {{#each products}}
+            <div>
+                <p>Título: {{title}} Descripción: {{description}} Precio: {{price}} Código: {{code}} Stock: {{stock}} Categoría: {{category}} Estado: {{status}} Id: {{_id}}</p>
+            </div>
+        {{/each}}
+    </div>
+
+<h2>Crear Nuevo Producto</h2>
+    <form id="idForm">
+        <label for="title">Título</label>
+        <input type="text" required name="title">
+        <label for="description">Descripción</label>
+        <input type="text" required name="description">
+        <label for="category">Categoría</label>
+        <input type="text" required name="category">
+        <label for="price">Precio</label>
+        <input type="number" required name="price">
+        <label for="stock">Stock</label>
+        <input type="number" required name="stock">
+        <label for="code">Código</label>
+        <input type="text" required name="code">
+        <button type="submit">Enviar</button>
+    </form><br><br>
+
+
