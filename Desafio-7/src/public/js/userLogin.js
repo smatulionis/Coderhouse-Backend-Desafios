@@ -15,7 +15,7 @@ logForm.addEventListener('submit', (e) => {
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        if (data.response === 'Login válido') {
+        if (data.message === 'Login válido') {
             window.location.href = '/home';
         }
     })

@@ -5,7 +5,7 @@ regForm.addEventListener('submit', (e) => {
     const datForm = new FormData(e.target);
     const userData = Object.fromEntries(datForm);
 
-    fetch('/api/users', {
+    fetch('/api/sessions/register', {
         method: 'POST',
         body: JSON.stringify(userData),
         headers: {
@@ -15,7 +15,7 @@ regForm.addEventListener('submit', (e) => {
     .then(response => response.json())
     .then(data => {
         console.log(data);
-        if (data.response === 'Usuario creado con éxito') {
+        if (data.message === 'Usuario creado con éxito') {
             window.location.href = '/userlogin';
         }
     })
