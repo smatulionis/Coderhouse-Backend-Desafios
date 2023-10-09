@@ -1,0 +1,13 @@
+<h1>Productos</h1>
+
+{{#if user.first_name}}
+    {{#if user.last_name}}
+        <h2>¡Bienvenido/a {{user.first_name}} {{user.last_name}}!</h2>
+    {{/if}}
+{{/if}}
+
+{{#each products}}
+    <div>
+        <p>Título: {{title}} Descripción: {{description}} Precio: {{price}} Código: {{code}} Stock: {{stock}} Categoría: {{category}} Estado: {{status}} Id: {{_id}}</p>
+    </div>
+{{/each}}
