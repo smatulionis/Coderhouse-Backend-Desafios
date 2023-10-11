@@ -55,7 +55,7 @@ prodsRouter.get('/:id', async (req, res) => {
     }
 });
 
-prodsRouter.post('/', passportError('jwt'), authorization('Admin'), async (req, res) => {
+prodsRouter.post('/', passportError('jwt'), authorization('admin'), async (req, res) => {
     const { title, description, stock, code, price, category } = req.body;
     try {
         const prod = await productModel.create({ title, description, stock, code, price, category });
@@ -65,7 +65,7 @@ prodsRouter.post('/', passportError('jwt'), authorization('Admin'), async (req, 
     }
 });
 
-prodsRouter.put('/:id', passportError('jwt'), authorization('Admin'), async (req, res) => {
+prodsRouter.put('/:id', passportError('jwt'), authorization('admin'), async (req, res) => {
     const { id } = req.params;
     const { title, description, stock, status, code, price, category } = req.body;
 
@@ -80,7 +80,7 @@ prodsRouter.put('/:id', passportError('jwt'), authorization('Admin'), async (req
     }
 });
 
-prodsRouter.delete('/:id', passportError('jwt'), authorization('Admin'), async (req, res) => {
+prodsRouter.delete('/:id', passportError('jwt'), authorization('admin'), async (req, res) => {
     const { id } = req.params;
 
     try {

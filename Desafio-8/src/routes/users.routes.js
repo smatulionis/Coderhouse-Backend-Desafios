@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import { userModel } from '../models/users.models.js';
+import { passportError, authorization } from '../utils/messagesError.js';
 
 const userRouter = Router()
 
-userRouter.get('/', async (req, res) => {
+userRouter.get('/', passportError('jwt'), authorization('admin'), async (req, res) => {
     try {
         const users = await userModel.find();
         res.status(200).send({ response: 'OK', message: users });

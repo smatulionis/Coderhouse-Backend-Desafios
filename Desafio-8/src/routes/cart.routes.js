@@ -1,10 +1,11 @@
 import { Router } from 'express';
 import { cartModel } from '../models/carts.models.js';
 import { productModel } from '../models/products.models.js';
+import { passportError } from '../utils/messagesError.js';
 
 const cartRouter = Router();
 
-cartRouter.get('/:id', async (req, res) => {
+cartRouter.get('/:id', passportError('jwt'), async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -19,7 +20,7 @@ cartRouter.get('/:id', async (req, res) => {
     }
 });
 
-cartRouter.post('/:cid/products/:pid', async (req, res) => {
+cartRouter.post('/:cid/products/:pid', passportError('jwt'), async (req, res) => {
     const { cid, pid } = req.params;
     const { quantity } = req.body;
 
@@ -51,7 +52,7 @@ cartRouter.post('/:cid/products/:pid', async (req, res) => {
     }
 });
 
-cartRouter.delete('/:cid/products/:pid', async (req, res) => {
+cartRouter.delete('/:cid/products/:pid', passportError('jwt'), async (req, res) => {
     const { cid, pid } = req.params;
     
     try {
@@ -81,7 +82,7 @@ cartRouter.delete('/:cid/products/:pid', async (req, res) => {
     }
 });
 
-cartRouter.put('/:cid', async (req, res) => {
+cartRouter.put('/:cid', passportError('jwt'), async (req, res) => {
     const { cid } = req.params;
     const newArray = req.body;
 
@@ -116,7 +117,7 @@ cartRouter.put('/:cid', async (req, res) => {
     }
 });
 
-cartRouter.put('/:cid/products/:pid', async (req, res) => {
+cartRouter.put('/:cid/products/:pid', passportError('jwt'), async (req, res) => {
     const { cid, pid } = req.params;
     const { quantity } = req.body;
 
@@ -149,7 +150,7 @@ cartRouter.put('/:cid/products/:pid', async (req, res) => {
     }
 });
 
-cartRouter.delete('/:cid', async (req, res) => {
+cartRouter.delete('/:cid', passportError('jwt'), async (req, res) => {
     const { cid } = req.params;
     
     try {
