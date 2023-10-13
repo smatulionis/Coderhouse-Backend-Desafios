@@ -35,7 +35,7 @@ const initializePassport = () => {
             try {
                 const user = await userModel.findOne({ email: email });
                 if (user) {
-                    return done(null, false);
+                    return done(null, false, { message: 'Usuario existente' });
                 }
 
                 const passwordHash = createHash(password);
@@ -53,7 +53,7 @@ const initializePassport = () => {
             } catch (error) {
                 return done(error);
             }
-        }))
+    }));
 
     passport.use('login', new LocalStrategy(
         { usernameField: 'email' }, async (username, password, done) => {
@@ -61,29 +61,26 @@ const initializePassport = () => {
                 const user = await userModel.findOne({ email: username });
 
                 if (!user) {
-                    return done(null, false);
+                    return done(null, false, { message: 'Usuario inválido' });
                 }
 
                 if (validatePassword(password, user.password)) {
                     return done(null, user);
                 }
 
-                return done(null, false);
+                return done(null, false, { message: 'Usuario inválido' });
 
             } catch (error) {
                 return done(error);
             }
-        }));
-    
+    }));
+
     passport.use('github', new GithubStrategy({
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.SECRET_CLIENT,
         callbackURL: process.env.CALLBACK_URL
     }, async (accessToken, refreshToken, profile, done) => {
         try {
-            console.log(accessToken);
-            console.log(refreshToken);
-            console.log(profile._json);
             const user = await userModel.findOne({ email: profile._json.email });
             if (user) {
                 done(null, user);

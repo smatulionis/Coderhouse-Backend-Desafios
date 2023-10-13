@@ -4,8 +4,6 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import passport from 'passport';
 import initializePassport from './config/passport.js';
-import session from 'express-session';
-import MongoStore from 'connect-mongo';
 import { __dirname } from './path.js';
 import { engine } from 'express-handlebars';
 import { Server } from 'socket.io';
@@ -34,23 +32,8 @@ app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', path.resolve(__dirname, './views'));
 
-app.use(session({
-    store: MongoStore.create({ 
-        mongoUrl: process.env.MONGO_URL,
-        mongoOptions: {
-            useNewUrlParser: true, 
-            useUnifiedTopology: true 
-        },
-        ttl: 60 
-    }),
-    secret: process.env.SESSION_SECRET,
-    resave: false, 
-    saveUninitialized: false
-}));
-
 initializePassport();
 app.use(passport.initialize());
-app.use(passport.session());
 
 const io = new Server(serverExpress);
 io.on('connection', (socket) => {
