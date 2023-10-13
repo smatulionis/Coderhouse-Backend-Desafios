@@ -58,9 +58,9 @@ sessionsRouter.get('/githubCallback', passport.authenticate('github', { failureR
 });
 
 sessionsRouter.get('/logout', (req, res) => {
-    if (req.session.login) {
-        req.session.destroy();
-    } 
+    // if (req.session.login) {
+    //     req.session.destroy();
+    // } 
     res.clearCookie('jwtCookie');
     res.status(200).send({ message: 'Usuario deslogueado' });
 });

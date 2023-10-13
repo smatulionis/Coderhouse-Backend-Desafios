@@ -34,12 +34,6 @@ app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', path.resolve(__dirname, './views'));
 
-const staticMiddleware = express.static(path.join(__dirname, '/public'));
-const sharedRoutes = ['/realtimeproducts', '/realtimechat', '/userregister', '/userlogin', '/userprofile'];
-sharedRoutes.forEach((route) => {
-  app.use(route, staticMiddleware);
-});
-
 app.use(session({
     store: MongoStore.create({ 
         mongoUrl: process.env.MONGO_URL,
