@@ -40,9 +40,15 @@ io.on('connection', (socket) => {
     console.log("Servidor Socket.io conectado");
     
     socket.on('newProduct', async (newProd) => {
-        await productModel.create(newProd);
-        const newProducts = await productModel.find().lean();
-        socket.emit('prods', newProducts);
+        try {
+            await productModel.create(newProd);
+            const newProducts = await productModel.find().lean();
+            socket.emit('prods', newProducts);
+        } catch (error) {
+            if (error.code == 11000) { 
+                socket.emit('error', { error: 'Producto ya creado con llave duplicada' });
+            }
+        }
     })
 
     socket.on('message', async (messageInfo) => {
