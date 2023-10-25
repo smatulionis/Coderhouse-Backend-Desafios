@@ -46,10 +46,9 @@ const initializePassport = () => {
                     email: email,
                     password: passwordHash
                 });
-
+                
                 return done(null, userCreated);
                 
-
             } catch (error) {
                 return done(error);
             }

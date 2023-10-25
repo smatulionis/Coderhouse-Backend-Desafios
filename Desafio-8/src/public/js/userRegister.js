@@ -12,17 +12,18 @@ regForm.addEventListener('submit', (e) => {
           'Content-Type': 'application/json',
         },
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        if (data.message === 'Usuario creado con éxito') {
+    .then(response => {
+        if (response.status === 201) {
             window.location.href = '/userlogin';
         }
-    })
+        return response.json();
+    }) 
+    .then(data => {
+        console.log(data);
+    })   
     .catch(error => {
         console.error('Error al crear el usuario:', error);
     });
       
     e.target.reset();
 });
-

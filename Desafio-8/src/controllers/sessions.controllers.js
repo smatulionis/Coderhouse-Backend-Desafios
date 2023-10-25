@@ -22,10 +22,6 @@ export const postRegister = async (req, res) => {
     }
 }
 
-export const getGithub = async (req, res) => {
-
-}
-
 export const getGithubCallback = async (req, res) => {
     const token = generateToken(req.user);
     res.cookie('jwtCookie', token, {

@@ -12,12 +12,14 @@ logForm.addEventListener('submit', (e) => {
           'Content-Type': 'application/json',
         },
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        if (data.message === 'Login válido') {
+    .then(response => {
+        if (response.status === 200) {
             window.location.href = '/home';
         }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
     })
     .catch(error => {
         console.error('Error en login:', error);
