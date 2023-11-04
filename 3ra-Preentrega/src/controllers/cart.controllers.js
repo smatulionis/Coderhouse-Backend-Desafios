@@ -151,55 +151,6 @@ export const deleteCart = async (req, res) => {
     }
 }
 
-// export const postCartPurchase = async (req, res) => {
-//     const { cid } = req.params;
-
-//     try {
-//         const cart = await cartModel.findById(cid);
-
-//         if (!cart) {
-//             return res.status(404).send({ error: 'Carrito no encontrado' });
-//         }
-
-//         const user = await userModel.findOne({ cart: cart._id });
-
-//         if (!user) {
-//             return res.status(404).send({ error: 'No se encontró usuario vinculado al carrito' });
-//         }
-
-//         const products = cart.products;
-//         const insufficientStockProducts = [];
-//         let totalPrice = 0;
-
-//         for (const product of products) {
-//             const productInDatabase = await productModel.findById(product.id_prod._id);
-
-//             if (productInDatabase.stock < product.quantity) {
-//                 insufficientStockProducts.push({ id: product.id_prod._id, nombre: product.id_prod.title });
-//             } else {
-//                 productInDatabase.stock -= product.quantity;
-//                 await productInDatabase.save();
-
-//                 totalPrice += productInDatabase.price * product.quantity;
-//             }
-//         }
-
-//         if (insufficientStockProducts.length === 0) {
-//             const newTicket = new ticketModel({
-//                 amount: totalPrice, 
-//                 purchaser: user.email, 
-//             });
-//             await newTicket.save();
-//             return res.status(200).send({ message: 'Compra confirmada' });
-//         } else {
-//             return res.status(400).send({ error: 'Productos con stock insuficiente', insufficientStockProducts });
-//         } 
-
-//     } catch (error) {
-//         res.status(500).send({ error: `Error en confirmar compra ${error}` });
-//     }
-// };
-
 export const postCartPurchase = async (req, res) => {
     const { cid } = req.params;
 
