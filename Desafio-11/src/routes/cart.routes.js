@@ -5,7 +5,7 @@ import { passportError, authorization } from '../utils/messagesError.js';
 const cartRouter = Router();
 
 cartRouter.get('/:id', passportError('jwt'), getCart);
-cartRouter.post('/:cid/products/:pid', passportError('jwt'), authorization('admin'), postCartProduct);
+cartRouter.post('/:cid/products/:pid', passportError('jwt'), authorization('user'), postCartProduct);
 cartRouter.delete('/:cid/products/:pid', passportError('jwt'), deleteCartProduct);
 cartRouter.put('/:cid', passportError('jwt'), putCart);
 cartRouter.put('/:cid/products/:pid', passportError('jwt'), putCartProduct);
