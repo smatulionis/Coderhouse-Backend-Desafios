@@ -1,7 +1,7 @@
 paths:
   /api/cart/{id}:
     get:
-      summary: Obtener productos del carrito
+      summary: Obtener carrito
       tags:
         - Cart
       parameters:
@@ -13,7 +13,7 @@ paths:
           description: Id del carrito a buscar
       responses:
         '200':
-          description: Productos del carrito obtenidos correctamente
+          description: Carrito obtenido correctamente
           content:
             application/json:
               schema:
