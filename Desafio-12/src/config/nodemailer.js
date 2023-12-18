@@ -6,7 +6,7 @@ const transport = nodemailer.createTransport({
     secure: true,
     auth: {
         user: 'pruebacoder590@gmail.com',
-        pass: 'tmiz iigp iazt qiaa',
+        pass: process.env.SMTP_SECRET,
         authMethod: 'LOGIN'
     }
 });
